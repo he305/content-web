@@ -1,14 +1,23 @@
 import React from 'react'
 import Register from '../components/Register'
 import Login from '../components/Login'
+import Logout from '../components/Logout'
 
 function Home() {
     const isLogin = localStorage.getItem("user");
     const renderAuthButton = () => {
         if (!isLogin) {
-            return <Login />;
+            return (
+            <div>
+                <Login />
+                <Register />
+            </div>
+            );
         } else {
-            return <h1>Hello</h1>;
+            return <div>
+                <h1>Hello</h1>
+                <Logout />
+                </div>;
         }
     }
 

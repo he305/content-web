@@ -1,15 +1,25 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import {Link} from 'react-router-dom'
 import * as FaIcons from 'react-icons/fa';
 import * as AiIcons from 'react-icons/ai';
 import { NavbarData } from './NavbarData';
 import './Navbar.css';
 import {IconContext} from 'react-icons'
+import AuthService from '../api/auth.service';
+
 
 function Navbar() {
-    const [sidebar, setSidebar] = useState(false)
+    const [sidebar, setSidebar] = useState(false);
+    const [currentUser, setCurrentUser] = useState(undefined);
 
     const toggleSidebar = () => setSidebar(!sidebar)
+
+    useEffect(() => {
+        const user = AuthService.getCurrentUser();
+        if (user) {
+            setCurrentUser(user);
+        }
+    }, []);
   return (
     <>
     <IconContext.Provider value={{color: '#fff'}}>
@@ -31,7 +41,7 @@ function Navbar() {
                         <span>Home</span>
                     </Link>
                 </li>
-                {NavbarData.map((item, index) => {
+                {currentUser && NavbarData.map((item, index) => {
                     return (
                         <li key={index} className={item.cName}>
                             <Link to={item.path}>
