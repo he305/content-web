@@ -9,7 +9,18 @@ const getWatchingList = () => {
 const addWatchingListEntry = (entryName, accounts) => {
     const endPoint = '/add';
     return api.post(API_URL + endPoint, {
-        entry: {
+        data: {
+            name: entryName,
+            accounts: accounts
+        }
+    }).then((response) => {
+        console.log(response);
+    })
+}
+
+const updateEntry = (entryName, accounts) => {
+    return api.put(API_URL, {
+        data: {
             name: entryName,
             accounts: accounts
         }
@@ -29,7 +40,8 @@ const getAccountPlatforms = () => {
 const watchingListService = {
     getWatchingList,
     addWatchingListEntry,
-    getAccountPlatforms
+    getAccountPlatforms,
+    updateEntry
 }
 
 export default watchingListService;

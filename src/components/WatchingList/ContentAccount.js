@@ -12,7 +12,7 @@ function ContentAccount(props) {
                 setPlatformIcon(<Icon icon="mdi:twitch" width="30" height="30" />);
                 break;
             default:
-                setPlatformIcon(undefined)
+                setPlatformIcon(<span>{item.platform}</span>)
                 break;
         }
     }, [item])

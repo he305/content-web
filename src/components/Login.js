@@ -1,9 +1,11 @@
 import React, {useState} from 'react'
 import AuthService from '../api/auth.service';
+import './Login.css'
 
 const Login = () => {
     const[username, setUsername] = useState("")
     const[password, setPassword] = useState("")
+    const[isError, setisError] = useState(false)
 
     const handleRegister = async (e) => {
         e.preventDefault();
@@ -12,7 +14,7 @@ const Login = () => {
                 window.location.reload();
             },
             (error) => {
-                console.log(error);
+                setisError(true)
             });
         } catch (err) {
             console.log(err);
@@ -20,12 +22,22 @@ const Login = () => {
     };
 
     return (
-        <div>
+        <div className="login-box">
             <form onSubmit={handleRegister}>
                 <h3>Login</h3>
-                <input type="text" placeholder="Enter username" value={username} onChange={(e) => setUsername(e.target.value)} />
-                <input type="password" placeholder="Enter password" value={password} onChange={(e) => setPassword(e.target.value)} />
+                <br />
+                <div className='user-box'>
+                    <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} required/>
+                    <label>Username</label>
+                </div>
+                
+                <div className='user-box'>
+                    <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required/>
+                    <label>Password</label>
+                </div>
                 <button type="submit">Login</button>
+                {isError && 
+                <span className='user-error'>Account doesn't exist</span>}
             </form>
         </div>
     )

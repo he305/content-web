@@ -14,8 +14,7 @@ const WatchingList = () => {
 
     useEffect(() =>{
         watchingListService.getWatchingList().then((response) => {
-            console.log(response.data.watchingList);
-            setWatchingList(response.data.watchingList)
+            setWatchingList(response.data.data)
         },
         (error) => {
             console.log(error);

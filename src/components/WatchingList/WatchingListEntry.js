@@ -23,9 +23,9 @@ function WatchingListEntry(props) {
             <ContentAccount item={item} key={index} />
         ))}
     </div>
-    { updateEntryForm && 
-            <UpdateEntryForm entry={entry}/>
-        }
+        { updateEntryForm && 
+                <UpdateEntryForm entry={entry}/>
+            }
     </>
   )
 }

@@ -1,22 +1,18 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import watchingListService from '../../api/watchingList.service';
+import ChangeContentAccountForm from './ChangeContentAccountForm';
 
 function UpdateEntryForm(props) {
     
     const entry = props.entry
     const[entryName, setEntryName] = useState("")
-    const[accountName, setAccountName] = useState("")
-    const[platform, setPlatform] = useState("")
+    const[accounts, setAccounts] = useState([])
 
-    const addEntry = async (e) => {
+    const updateEntry = async (e) => {
         e.preventDefault()
-        const accounts = [{
-            name: accountName,
-            platform: platform
-        }]
-
+        console.log(entryName, accounts);
         try {
-            await watchingListService.addWatchingListEntry(entryName, accounts).then(() => {
+            await watchingListService.updateEntry(entryName, accounts).then(() => {
                 window.location.reload();
             },
             (error) => {
@@ -25,18 +21,33 @@ function UpdateEntryForm(props) {
         } catch (err) {
             console.log(err);
         }
-
     }
+
+    const accountsChanged = (newAccounts) => {
+        setAccounts(newAccounts)
+    }
+
+    useEffect(() => {
+        if (entry !== undefined) {
+            setEntryName(entry.name);
+            let data = []
+            entry.accounts.forEach((acc, index) => {
+                let newAcc = {
+                    name: acc.name,
+                    platform: acc.platform
+                };
+                data = [...data, newAcc];
+            })
+            setAccounts(data);
+        }
+    }, [entry])
 
   return (
     <div>
         <form>
-            <input type="text" placeholder={entry.name} value={entryName} onChange={(e) => setEntryName(e.target.value)}></input>
-            <div>
-                <input type="text" placeholder="Enter account nickname" value={accountName} onChange={(e) => setAccountName(e.target.value)}></input>
-                <input type="text" placeholder="Enter platform" value={platform} onChange={(e) => setPlatform(e.target.value)}></input>
-            </div>
-            <button type="submit" onClick={addEntry}>Enter</button>
+            <input type="text" placeholder="Enter entry name" value={entryName} onChange={(e) => setEntryName(e.target.value)}></input>
+            <ChangeContentAccountForm onAccountsChange={accountsChanged} initialAccounts={entry.accounts}/>
+            <button type="submit" onClick={updateEntry}>Enter</button>
         </form>
     </div>
   )

@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react'
 import watchingListService from '../../api/watchingList.service';
 import Select from 'react-select'
 
-function SelectPlatform() {
+const SelectPlatform = (props) => {
     const [valueArray, setValueArray] = useState([])
 
     useEffect(() => {
@@ -16,7 +16,9 @@ function SelectPlatform() {
         setValueArray(options)
     }, [])
   return (
-    <Select options={valueArray} />
+    <Select options={valueArray} onChange={(selectedOption) => {
+      props.sendPlatform(selectedOption.value, props.selectPlatformIndex)
+    }}/>
   )
 }
 

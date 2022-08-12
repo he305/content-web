@@ -5,6 +5,8 @@ const instance =  axios.create({
     baseURL: 'http://localhost:8081',
     headers: {
         "Content-Type": "application/json",
+        "Access-Control-Allow-Origin" : "*",
+        'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS'
     },
 });
 
@@ -38,6 +40,8 @@ instance.interceptors.response.use(
                     TokenService.updateLocalAccessToken(token);
                     return instance(originalConfig);
                 } catch (_error) {
+                    TokenService.removeUser();
+                    window.location.replace('/');
                     return Promise.reject(_error);
                 }
             }
