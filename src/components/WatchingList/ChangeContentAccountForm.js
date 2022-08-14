@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from "react";
 import SelectPlatform from "./SelectPlatform";
 import { Icon } from '@iconify/react';
+import './ChangeContentAccountForm.css';
 
 const ChangeContentAccountForm = (props) => {
 
@@ -12,10 +13,19 @@ const ChangeContentAccountForm = (props) => {
         },
     ]);
 
-    const handleDataChange = (event, index) => {
+    const handleNameChange = (event, index) => {
         let data = [...accounts];
         data[index][event.target.name] = event.target.value;
         setAccounts(data);
+
+        props.onAccountsChange(data);
+    }
+
+    const handlePlatformChange = (value, index) => {
+        let data = [...accounts];
+        data[index]['platform'] = value;
+        setAccounts(data);
+        console.log(data);
 
         props.onAccountsChange(data);
     }
@@ -57,20 +67,20 @@ const ChangeContentAccountForm = (props) => {
         <>
         {accounts.map((account, index) => {
             return (
-            <div key={index}>
-                <input type="text" onChange={(e) => handleDataChange(e, index)} name='name' placeholder="Enter account nickname" value={account.name}></input>
-                <input type="text" onChange={(e) => handleDataChange(e, index)} name='platform' placeholder="Enter platform" value={account.platform}></input>
-                {
-                    index === accounts.length - 1 && 
+            <div className="change-content-account-box" key={index}>
+                <input type="text" onChange={(e) => handleNameChange(e, index)} name='name' placeholder="Enter account nickname" value={account.name}></input>
+                <SelectPlatform selectPlatformIndex={index} sendPlatform={handlePlatformChange} value={account.platform}/>
+                {/* <input type="text" onChange={(e) => handlePlatformChange(e)} name='platform' placeholder="Enter platform" value={account.platform}></input>
+                { */}
+                {   index === accounts.length - 1 && 
                     <Icon icon="akar-icons:circle-plus-fill" color="#060b26" onClick={addFields}/>
                 }
-                {   index > 0 &&
+                {   accounts.length !== 1 &&
                     <Icon icon="clarity:remove-solid" color="#060b26" onClick={(e) => {
                         e.preventDefault();
                         removeField(index)
                     }}/>
                 }
-                {/* <SelectPlatform selectPlatformIndex={index} sendPlatform={handleDataChange} value={account.platform}/> */}
             </div>
             );
         })}

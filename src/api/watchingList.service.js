@@ -29,6 +29,25 @@ const updateEntry = (entryName, accounts) => {
     })
 }
 
+const deleteEntry = (entryName) => {
+    return api.delete(API_URL, 
+        {
+            data: {
+                entryName: entryName
+            }
+        }
+    ).then((response) => {
+        console.log(response);
+    })
+}
+
+const getNotifications = (contentAccountName, platform) => {
+    return api.post(API_URL + '/notification', {
+        contentAccountName: contentAccountName,
+        platform: platform
+    });
+}
+
 const getAccountPlatforms = () => {
     // TODO
     return [
@@ -41,7 +60,9 @@ const watchingListService = {
     getWatchingList,
     addWatchingListEntry,
     getAccountPlatforms,
-    updateEntry
+    updateEntry,
+    deleteEntry,
+    getNotifications
 }
 
 export default watchingListService;

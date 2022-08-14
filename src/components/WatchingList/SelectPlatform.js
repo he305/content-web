@@ -4,6 +4,7 @@ import Select from 'react-select'
 
 const SelectPlatform = (props) => {
     const [valueArray, setValueArray] = useState([])
+    const [currentValue, setCurrentValue] = useState("")
 
     useEffect(() => {
         const platforms = watchingListService.getAccountPlatforms()
@@ -17,6 +18,7 @@ const SelectPlatform = (props) => {
     }, [])
   return (
     <Select options={valueArray} onChange={(selectedOption) => {
+      //setCurrentValue(selectedOption.value);
       props.sendPlatform(selectedOption.value, props.selectPlatformIndex)
     }}/>
   )

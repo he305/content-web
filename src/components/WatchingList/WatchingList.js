@@ -7,18 +7,29 @@ import './WatchingList.css'
 const WatchingList = () => {
     const[watchingList, setWatchingList] = useState([]);
     const[addEntryForm, setAddEntryForm] = useState(false);
+    const[hasNotifications, setHasNotifications] = useState(false);
 
     const toggleEntryForm = () => {
         setAddEntryForm(!addEntryForm);
     }
 
-    useEffect(() =>{
+    const updateEntries = () => {
         watchingListService.getWatchingList().then((response) => {
-            setWatchingList(response.data.data)
+            console.log("called")
+            let list = response.data.data;
+            setWatchingList(list)
         },
         (error) => {
             console.log(error);
         })
+    }
+
+    useEffect(() =>{
+        updateEntries();
+        const interval = setInterval(() => {
+            updateEntries();
+        }, 1000 * 1 * 30);
+        return () => clearInterval(interval);
     }, []);
 
     return (
@@ -28,32 +39,12 @@ const WatchingList = () => {
                     <WatchingListEntry entry={item} key={index} />
                     ))} 
         </ul>
-        <button onClick={toggleEntryForm}>Add new entry</button>
+        <button className="watching-list-add-button" onClick={toggleEntryForm}>Add new entry</button>
         { addEntryForm && 
-            <AddEntryForm />
+            <AddEntryForm onConfirm={toggleEntryForm}/>
         }
       </div>
     );
 }
 
 export default WatchingList;
-
-{/* <ul>
-        {watchingList.map((item, index) => {
-                    return (
-                        <li key={index}>
-                            <span>{item.name}</span>
-                            <ul>
-                            {watchingList[index].accounts.map((itemin, j) => {
-                                return (
-                                <li key={j}>
-                                    <span>{itemin.name}</span>
-                                    <span>{itemin.platform}</span>    
-                                </li>
-                                )
-                            })}    
-                            </ul>  
-                        </li>
-                    ) 
-                    })} 
-        </ul> */}

@@ -5,7 +5,7 @@ import * as AiIcons from 'react-icons/ai';
 import { NavbarData } from './NavbarData';
 import './Navbar.css';
 import {IconContext} from 'react-icons'
-import AuthService from '../api/auth.service';
+import TokenService from '../api/token.service';
 
 
 function Navbar() {
@@ -15,7 +15,7 @@ function Navbar() {
     const toggleSidebar = () => setSidebar(!sidebar)
 
     useEffect(() => {
-        const user = AuthService.getCurrentUser();
+        const user = TokenService.getUser();
         if (user) {
             setCurrentUser(user);
         }

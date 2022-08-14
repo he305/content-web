@@ -6,10 +6,17 @@
     align-items: center;
 }
 
+.navbar-title {
+    color: #fefefe;
+    position: absolute;
+    left: 50%;
+}
+
 .menu-bars {
     margin-left: 2rem;
     font-size: 2rem;
     background: none;
+    display: inline-block;
 }
 
 .nav-menu {

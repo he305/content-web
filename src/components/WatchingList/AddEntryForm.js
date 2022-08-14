@@ -3,7 +3,8 @@ import watchingListService from '../../api/watchingList.service';
 import ChangeContentAccountForm from './ChangeContentAccountForm';
 import './AddEntryForm.css'
 
-function AddEntryForm() {
+function AddEntryForm(props) {
+
     
     const[entryName, setEntryName] = useState("")
     const[accounts, setAccounts] = useState([])
@@ -12,6 +13,7 @@ function AddEntryForm() {
         e.preventDefault()
         try {
             await watchingListService.addWatchingListEntry(entryName, accounts).then(() => {
+                props.onConfirm();
                 window.location.reload();
             },
             (error) => {
@@ -27,11 +29,14 @@ function AddEntryForm() {
     }
 
   return (
-    <div className="add-entry-form">
-        <form>
+    <div className="add-entry-box">
+        <form className="add-entry-form">
             <input type="text" placeholder="Enter entry name" value={entryName} onChange={(e) => setEntryName(e.target.value)}></input>
             <ChangeContentAccountForm onAccountsChange={accountsChanged} />
-            <button type="submit" onClick={addEntry}>Enter</button>
+            <div>
+                <button type="submit" onClick={addEntry}>Enter</button>
+                <button type="submit" onClick={props.onConfirm}>Cancel</button>
+            </div>
         </form>
     </div>
   )
