@@ -49,11 +49,8 @@ const getNotifications = (contentAccountName, platform) => {
 }
 
 const getAccountPlatforms = () => {
-    // TODO
-    return [
-        "TWITCH",
-        "WASD"
-    ]
+    const endPoint = '/platforms';
+    return api.get(API_URL + endPoint)
 }
 
 const watchingListService = {
