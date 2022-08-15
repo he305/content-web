@@ -69,7 +69,7 @@ const ChangeContentAccountForm = (props) => {
             return (
             <div className="change-content-account-box" key={index}>
                 <input type="text" onChange={(e) => handleNameChange(e, index)} name='name' placeholder="Enter account nickname" value={account.name}></input>
-                <SelectPlatform selectPlatformIndex={index} sendPlatform={handlePlatformChange} value={account.platform}/>
+                <SelectPlatform currentValue={{value: account.platform, label: account.platform}} selectPlatformIndex={index} sendPlatform={handlePlatformChange} value={account.platform}/>
                 {/* <input type="text" onChange={(e) => handlePlatformChange(e)} name='platform' placeholder="Enter platform" value={account.platform}></input>
                 { */}
                 {   index === accounts.length - 1 && 

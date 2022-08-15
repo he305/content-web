@@ -1,0 +1,14 @@
+.stream-list-container {
+    width: 50%;
+    margin-left: 16px;
+    margin-top: 16px;
+}
+
+.stream-list-entry-name {
+    color: #fefefe;
+    padding: 0.5em 0.5em 0.9em 0.8em;
+}
+
+.stream-list-entry-box-header {
+    display: flex;
+}
