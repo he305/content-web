@@ -1,0 +1,16 @@
+.list-entry-box {
+    border: 1px solid;
+    border-radius: 15px;
+    margin-top: 32px;
+    padding: 0.5em 0.1em 0.5em 0.1em;
+    background-color: #060b26;
+}
+
+.list-entry-name {
+    color: #fefefe;
+    padding: 0.5em 0.5em 0.9em 0.8em;
+}
+
+.list-entry-box-header {
+    display: flex;
+}
