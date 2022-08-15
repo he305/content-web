@@ -9,6 +9,7 @@ const Notification = (props) => {
         <div>
            {notificationData.map((item, index) => (
             <div key={index}>
+                <span>{item.time}</span>
                 <span>{item.data}</span>
             </div>
            ))}
