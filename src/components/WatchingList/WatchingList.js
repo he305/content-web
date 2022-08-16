@@ -15,7 +15,6 @@ const WatchingList = () => {
 
     const updateEntries = () => {
         watchingListService.getWatchingList().then((response) => {
-            console.log("called")
             let list = response.data.data;
             setWatchingList(list)
         },

@@ -29,8 +29,6 @@ function ContentAccount(props) {
     const callGetNotifications = async () => {
         try {
             await WatchingListService.getNotifications(item.name, item.platform).then((response) => {
-                console.log("here", response);
-                console.log(response.data);
                 let datas = response.data.notificationDtoList;
                 console.log(datas);
                 setNotificationData({
@@ -62,7 +60,7 @@ function ContentAccount(props) {
 
   return (
     <div className="content-account-list">
-        <span>{item.name}</span>
+        <span>{item.alias}</span>
         <Badge className="content-account-badge" badgeContent={notificationSize} color="secondary" onClick={getNotifications}>
             {platformIcon}
         </Badge>

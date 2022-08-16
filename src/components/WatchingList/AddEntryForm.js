@@ -11,8 +11,19 @@ function AddEntryForm(props) {
 
     const addEntry = async (e) => {
         e.preventDefault()
+        let accs = accounts.map((item, index) => {
+            let alias = item.alias;
+            if (alias === "") {
+                alias = item.name;
+            }
+            return {
+                alias: alias,
+                name: item.name,
+                platform: item.platform
+            }
+        })
         try {
-            await watchingListService.addWatchingListEntry(entryName, accounts).then(() => {
+            await watchingListService.addWatchingListEntry(entryName, accs).then(() => {
                 props.onConfirm();
                 window.location.reload();
             },

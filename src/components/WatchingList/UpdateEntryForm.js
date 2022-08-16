@@ -10,9 +10,19 @@ function UpdateEntryForm(props) {
 
     const updateEntry = async (e) => {
         e.preventDefault()
-        console.log(entryName, accounts);
+        let accs = accounts.map((item, index) => {
+            let alias = item.alias;
+            if (alias === "") {
+                alias = item.name;
+            }
+            return {
+                alias: alias,
+                name: item.name,
+                platform: item.platform
+            }
+        })
         try {
-            await watchingListService.updateEntry(entryName, accounts).then(() => {
+            await watchingListService.updateEntry(entryName, accs).then(() => {
                 window.location.reload();
             },
             (error) => {
@@ -33,6 +43,7 @@ function UpdateEntryForm(props) {
             let data = []
             entry.accounts.forEach((acc, index) => {
                 let newAcc = {
+                    alias: acc.alias,
                     name: acc.name,
                     platform: acc.platform
                 };
