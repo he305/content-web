@@ -8,6 +8,7 @@ const ChangeContentAccountForm = (props) => {
     const initialAccounts = props.initialAccounts;
     const[accounts, setAccounts] = useState([
         {
+            alias: "",
             name: "",
             platform: ""
         },
@@ -32,6 +33,7 @@ const ChangeContentAccountForm = (props) => {
 
     const addFields = () => {
         let account = {
+            alias: "",
             name: "",
             platform: ""
         }
@@ -44,6 +46,7 @@ const ChangeContentAccountForm = (props) => {
             let data = []
             initialAccounts.forEach((acc, index) => {
                 let newAcc = {
+                    alias: acc.alias,
                     name: acc.name,
                     platform: acc.platform
                 };
@@ -69,6 +72,7 @@ const ChangeContentAccountForm = (props) => {
             return (
             <div className="change-content-account-box" key={index}>
                 <input type="text" onChange={(e) => handleNameChange(e, index)} name='name' placeholder="Enter account nickname" value={account.name}></input>
+                <input type="text" onChange={(e) => handleNameChange(e, index)} name='alias' placeholder="Enter account alias (Optional)" value={account.alias}></input>
                 <SelectPlatform currentValue={{value: account.platform, label: account.platform}} selectPlatformIndex={index} sendPlatform={handlePlatformChange} value={account.platform}/>
                 {/* <input type="text" onChange={(e) => handlePlatformChange(e)} name='platform' placeholder="Enter platform" value={account.platform}></input>
                 { */}
