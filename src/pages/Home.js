@@ -2,6 +2,7 @@ import React, {useEffect} from 'react'
 import Register from '../components/Register'
 import Login from '../components/Login'
 import Logout from '../components/Logout'
+import './Home.css'
 
 function Home() {
     const isLogin = localStorage.getItem("user");
@@ -13,10 +14,10 @@ function Home() {
     const renderAuthButton = () => {
         if (!isLogin) {
             return (
-            <div>
-                <Login />
-                <Register />
-            </div>
+                <div className='login-register-box'>
+                    <Login />
+                    <Register />
+                </div>
             );
         } else {
             return <div>

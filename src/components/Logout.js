@@ -1,5 +1,6 @@
 import React from 'react'
 import AuthService from '../api/auth.service';
+import './Logout.css'
 
 const Logout = () => {
     const handleLogout = async (e) => {
@@ -9,9 +10,9 @@ const Logout = () => {
     };
 
     return (
-        <div>
+        <div className='logout-box'>
             <form onSubmit={handleLogout}>
-                <button type="submit">Logout</button>
+                <button className="logout-button" type="submit">Logout</button>
             </form>
         </div>
     )

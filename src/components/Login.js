@@ -5,16 +5,26 @@ import './Login.css'
 const Login = () => {
     const[username, setUsername] = useState("")
     const[password, setPassword] = useState("")
-    const[isError, setisError] = useState(false)
+    const[errorMessage, setErrorMessage] = useState({
+        message: "",
+        isLoading: false
+    })
 
     const handleRegister = async (e) => {
         e.preventDefault();
+        setErrorMessage({
+            message: '',
+            isLoading: false
+        })
         try {
             await AuthService.login(username, password).then(() => {
                 window.location.reload();
             },
             (error) => {
-                setisError(true)
+                setErrorMessage({
+                    message: error.response.data.message,
+                    isLoading: true
+                })
             });
         } catch (err) {
             console.log(err);
@@ -36,9 +46,9 @@ const Login = () => {
                     <label>Password</label>
                 </div>
                 <button type="submit">Login</button>
-                {isError && 
-                <span className='user-error'>Account doesn't exist</span>}
             </form>
+            {errorMessage.isLoading && 
+            <span className='user-error'>{errorMessage.message}</span>}
         </div>
     )
 }
