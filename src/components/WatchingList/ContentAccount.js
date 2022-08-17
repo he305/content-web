@@ -3,7 +3,7 @@ import './ContentAccount.css'
 import { Icon } from '@iconify/react';
 import { Badge } from '@mui/material';
 import Notification from './Notification';
-import WatchingListService from '../../api/watchingList.service';
+import watchingListService from '../../api/watchingList.service';
 
 function ContentAccount(props) {
     const item = props.item;
@@ -28,7 +28,7 @@ function ContentAccount(props) {
 
     const callGetNotifications = async () => {
         try {
-            await WatchingListService.getNotifications(item.name, item.platform).then((response) => {
+            await watchingListService.getNotifications(item.name, item.platform).then((response) => {
                 let datas = response.data.notificationDtoList;
                 datas.sort((a,b) => {
                     return a.time > b.time ? 1 : -1;

@@ -7,7 +7,6 @@ import './WatchingList.css'
 const WatchingList = () => {
     const[watchingList, setWatchingList] = useState([]);
     const[addEntryForm, setAddEntryForm] = useState(false);
-    const[hasNotifications, setHasNotifications] = useState(false);
 
     const toggleEntryForm = () => {
         setAddEntryForm(!addEntryForm);

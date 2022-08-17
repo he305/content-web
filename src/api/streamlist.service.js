@@ -6,8 +6,8 @@ const getStreamList = () => {
     return api.get(API_URL);
 }
 
-const StreamListService = {
+const streamListService = {
     getStreamList
 }
 
-export default StreamListService;
+export default streamListService;

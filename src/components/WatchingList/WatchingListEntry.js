@@ -4,7 +4,7 @@ import './WatchingListEntry.css'
 import { Icon } from '@iconify/react';
 import UpdateEntryForm from './UpdateEntryForm';
 import DeleteDialog from '../DeleteDialog';
-import WatchingListService from '../../api/watchingList.service';
+import watchingListService from '../../api/watchingList.service';
 
 function WatchingListEntry(props) {
     const entry = props.entry;
@@ -20,7 +20,7 @@ function WatchingListEntry(props) {
 
     const deleteEntry = async () => {
         try {
-            await WatchingListService.deleteEntry(entry.name).then(() => {
+            await watchingListService.deleteEntry(entry.name).then(() => {
                 window.location.reload();
             },
             (error) => {
