@@ -30,7 +30,9 @@ function ContentAccount(props) {
         try {
             await WatchingListService.getNotifications(item.name, item.platform).then((response) => {
                 let datas = response.data.notificationDtoList;
-                console.log(datas);
+                datas.sort((a,b) => {
+                    return a.time > b.time ? 1 : -1;
+                })
                 setNotificationData({
                     data: datas,
                     isLoading: true
