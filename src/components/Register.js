@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import AuthService from '../api/auth.service';
+import authService from '../api/auth.service';
 import * as Yup from "yup";
 import './Register.css';
 
@@ -32,7 +32,7 @@ const Register = () => {
             usernameField: username,
             passwordField: password
           }).then(async (valid) => {
-            await AuthService.register(username, password).then(() => {
+            await authService.register(username, password).then(() => {
                 window.location.reload();
             },
             (error) => {

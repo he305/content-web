@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import AuthService from '../api/auth.service';
+import authService from '../api/auth.service';
 import './Login.css'
 
 const Login = () => {
@@ -17,7 +17,7 @@ const Login = () => {
             isLoading: false
         })
         try {
-            await AuthService.login(username, password).then(() => {
+            await authService.login(username, password).then(() => {
                 window.location.reload();
             },
             (error) => {
