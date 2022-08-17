@@ -1,7 +1,7 @@
 import api from './axios';
 import TokenService from './token.service'
 
-const API_URL = '/api/auth';
+const API_URL = '/auth';
 
 const register = (username, password) => {
     console.log(username, password);

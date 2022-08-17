@@ -1,6 +1,6 @@
 import api from './axios';
 
-const API_URL = '/watchingList';
+const API_URL = '/watching-list';
 
 const getWatchingList = () => {
     return api.get(API_URL);
