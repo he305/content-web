@@ -47,7 +47,7 @@ services:
       - content-core
     container_name: content-web
     ports:
-      - 80:80
+      - 3000:80
     environment:
       - NODE_ENV=production
 
