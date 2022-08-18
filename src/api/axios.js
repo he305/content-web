@@ -1,8 +1,15 @@
 import axios from 'axios';
 import TokenService from './token.service'
 
+const getBaseUrl = () => {
+    if (process.env.REACT_APP_CONTENT_CORE_BASE_URL !== undefined) {
+        return process.env.REACT_APP_CONTENT_CORE_BASE_URL;
+    }
+    return "http://localhost:8081/api"
+}
+
 const instance =  axios.create({
-    baseURL: 'http://localhost:8081/api',
+    baseURL: getBaseUrl(),
     headers: {
         "Content-Type": "application/json",
         "Access-Control-Allow-Origin" : "*",
