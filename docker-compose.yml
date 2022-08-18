@@ -1,0 +1,8 @@
+version: '3'
+services:
+  content_web:
+    image: 'he305/content-web:latest'
+    restart: always
+    container_name: content_web
+    ports:
+      - 3000:80
