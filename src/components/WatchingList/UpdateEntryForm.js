@@ -5,6 +5,7 @@ import ChangeContentAccountForm from './ChangeContentAccountForm';
 function UpdateEntryForm(props) {
     
     const entry = props.entry
+    const initialEntryName = props.entry.name;
     const[entryName, setEntryName] = useState("")
     const[accounts, setAccounts] = useState([])
 
@@ -22,8 +23,14 @@ function UpdateEntryForm(props) {
             }
         })
         try {
-            await watchingListService.updateEntry(entryName, accs).then(() => {
-                window.location.reload();
+            await watchingListService.updateEntry(initialEntryName, accs).then(async () => {
+                if (initialEntryName !== entryName) {
+                    await watchingListService.updateWatchingListEntryName(initialEntryName, entryName).then(() => {
+                        window.location.reload();
+                    }).catch((error) => console.log(error))
+                } else {
+                    window.location.reload();
+                }
             },
             (error) => {
                 console.log(error);
