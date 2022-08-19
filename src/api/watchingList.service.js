@@ -53,13 +53,21 @@ const getAccountPlatforms = () => {
     return api.get(API_URL + endPoint)
 }
 
+const updateWatchingListEntryName = (oldName, newName) => {
+    return api.put(API_URL + "/update-name", {
+        newName: newName,
+        oldName: oldName
+    });
+}
+
 const watchingListService = {
     getWatchingList,
     addWatchingListEntry,
     getAccountPlatforms,
     updateEntry,
     deleteEntry,
-    getNotifications
+    getNotifications,
+    updateWatchingListEntryName
 }
 
 export default watchingListService;

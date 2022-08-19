@@ -2,8 +2,9 @@ import axios from 'axios';
 import TokenService from './token.service'
 
 const getBaseUrl = () => {
-    if (process.env.REACT_APP_CONTENT_CORE_BASE_URL !== undefined) {
-        return process.env.REACT_APP_CONTENT_CORE_BASE_URL;
+    console.log(process.env.REACT_APP_API_IP)
+    if (process.env.REACT_APP_API_IP !== undefined) {
+        return "http://" + process.env.REACT_APP_API_IP + ":" + process.env.REACT_APP_API_PORT + "/api";
     }
     return "http://localhost:8081/api"
 }
