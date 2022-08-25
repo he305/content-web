@@ -8,9 +8,17 @@ function AddEntryForm(props) {
     
     const[entryName, setEntryName] = useState("")
     const[accounts, setAccounts] = useState([])
+    const[errorMessage, setErrorMessage] = useState({
+        message : "",
+        isLoading: false
+    })
 
     const addEntry = async (e) => {
         e.preventDefault()
+        setErrorMessage({
+            message : "",
+            isLoading: false
+        })
         let accs = accounts.map((item, index) => {
             let alias = item.alias;
             if (alias === "") {
@@ -29,6 +37,10 @@ function AddEntryForm(props) {
             },
             (error) => {
                 console.log(error);
+                setErrorMessage({
+                    message : error.response.data.message,
+                    isLoading: true
+                })
             });
         } catch (err) {
             console.log(err);
@@ -48,6 +60,8 @@ function AddEntryForm(props) {
                 <button type="submit" onClick={addEntry}>Enter</button>
                 <button type="submit" onClick={props.onConfirm}>Cancel</button>
             </div>
+            {errorMessage.isLoading && 
+            <span>{errorMessage.message}</span>}
         </form>
     </div>
   )
