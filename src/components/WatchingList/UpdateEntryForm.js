@@ -8,9 +8,17 @@ function UpdateEntryForm(props) {
     const initialEntryName = props.entry.name;
     const[entryName, setEntryName] = useState("")
     const[accounts, setAccounts] = useState([])
+    const[errorMessage, setErrorMessage] = useState({
+        message : "",
+        isLoading: false
+    })
 
     const updateEntry = async (e) => {
         e.preventDefault()
+        setErrorMessage({
+            message : "",
+            isLoading: false
+        })
         let accs = accounts.map((item, index) => {
             let alias = item.alias;
             if (alias === "") {
@@ -27,14 +35,20 @@ function UpdateEntryForm(props) {
                 if (initialEntryName !== entryName) {
                     await watchingListService.updateWatchingListEntryName(initialEntryName, entryName).then(() => {
                         window.location.reload();
-                    }).catch((error) => console.log(error))
+                    }).catch((error) => {
+                        console.log(error)
+                })
                 } else {
                     window.location.reload();
                 }
             },
             (error) => {
                 console.log(error);
-            });
+                setErrorMessage({
+                    message : error.response.data.message,
+                    isLoading: true
+                })
+            })
         } catch (err) {
             console.log(err);
         }
@@ -67,6 +81,8 @@ function UpdateEntryForm(props) {
             <ChangeContentAccountForm onAccountsChange={accountsChanged} initialAccounts={entry.accounts}/>
             <button type="submit" onClick={updateEntry}>Enter</button>
         </form>
+        {errorMessage.isLoading && 
+        <span>{errorMessage.message}</span>}
     </div>
   )
 }
