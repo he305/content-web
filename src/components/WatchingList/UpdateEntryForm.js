@@ -6,7 +6,6 @@ function UpdateEntryForm(props) {
     
     const entry = props.entry
     const initialEntryName = props.entry.name;
-    const initialEntryName = props.entry.name;
     const[entryName, setEntryName] = useState("")
     const[accounts, setAccounts] = useState([])
     const[errorMessage, setErrorMessage] = useState({
