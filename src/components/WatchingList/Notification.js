@@ -6,9 +6,6 @@ const Notification = (props) => {
     console.log(notificationData)
 
     const getReadableTime = (timeArray) => {
-        if (timeArray[1] / 10 < 1) {
-            timeArray[1] = '0' + timeArray[1];
-        } 
         return timeArray[2] + '-' + timeArray[1] + '-' + timeArray[0] + ' ' +
                timeArray[3] + ':' + timeArray[4] + ':' + timeArray[5];
     }
